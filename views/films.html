@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
+    <title>Films</title>
+  </head>
+  <body>
+    <main class="container">
+      <div class="grid">
+        <article>
+          <details id="film-list" open>
+            <summary>Films</summary>
+            <div id="film-list" hx-post="/film" hx-trigger="load"></div>
+          </details>
+        </article>
+
+        <div>
+          <h1>Add Films</h1>
+          <form
+            hx-post="/film"
+            hx-target="#film-list"
+            hx-on::after-request="if(event.detail.successful) this.reset()"
+          >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Title"
+              name="title"
+              id="title"
+            />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Director"
+              name="director"
+              id="director"
+            />
+            <button type="submit" class="btn btn-primary" id="add-film">
+              Add Film
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

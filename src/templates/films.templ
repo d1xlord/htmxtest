@@ -1,0 +1,13 @@
+package templates
+
+import "htmxtest/src/models"
+
+templ Films(films []*models.Film) {
+  <ul>
+    for _, film := range films {
+      <li>
+        { film.Title } - { film.Director }
+      </li>
+    }
+  </ul>
+}
